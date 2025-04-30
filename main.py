@@ -34,38 +34,10 @@ PROJECTS = {
 
 ABOUT_DIRECTOR_TEXT = """🎥 **Sudharsan Sedhuramne** is an independent filmmaker whose work merges striking visuals and heartfelt storytelling. From **award-winning short films** and **captivating web series** to bold **pilot films** and immersive **album songs**, his creations redefine independent cinema. Every project reflects his innovative vision, crafting experiences that linger long after the screen fades.
 """
+
 WHATSAPP_LINK = "https://wa.me/917092197506"
+INSTAGRAM_LINK = "https://www.instagram.com/sudharsan_sedouramane_official?igsh=azdtdXd0MGZrcjk1"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    buttons = [[InlineKeyboardButton(name, callback_data=name)] for name in PROJECTS.keys()]
-    buttons.append([InlineKeyboardButton("About Director", callback_data="about_director")])
-    await update.message.reply_text("Welcome! Choose an option below:", reply_markup=InlineKeyboardMarkup(buttons))
-
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    if query.data in PROJECTS:
-        buttons = [[InlineKeyboardButton(p["name"], callback_data=f"project_{query.data}_{i}")]
-                   for i, p in enumerate(PROJECTS[query.data])]
-        await query.edit_message_text(f"Select a project from {query.data}:", reply_markup=InlineKeyboardMarkup(buttons))
-    elif query.data.startswith("project_"):
-        _, category, index = query.data.split("_", 2)
-        project = PROJECTS[category][int(index)]
-        image_path = f"images/{project['image']}"
-        with open(image_path, 'rb') as img:
-            await query.message.reply_photo(photo=img, caption=project["name"],
-                                            reply_markup=InlineKeyboardMarkup([
-                                                [InlineKeyboardButton("Open Video", url=project["link"])]
-                                            ]))
-    elif query.data == "about_director":
-        await query.edit_message_text(ABOUT_DIRECTOR_TEXT, parse_mode="Markdown",
-                                      reply_markup=InlineKeyboardMarkup([
-                                          [InlineKeyboardButton("Contact Director", url=WHATSAPP_LINK)]
-                                      ]))
-
-if __name__ == "__main__":
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button_handler))
-    app.run_polling()
+    image_path = "images/director_main.jpg"
+    if os.path.exists(image_path):
