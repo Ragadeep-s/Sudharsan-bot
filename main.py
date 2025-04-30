@@ -20,11 +20,11 @@ PROJECTS = {
         {"name": "The Last Wish", "image": "lastwish.jpg", "link": "https://youtu.be/6qtU1gNlci4?si=axJy7dUHhD8eozEM"}
     ],
     "Webseries": [
-        {"name": "Venpani Malare - Episode 1", "image": "venpani1.jpg", "link": "https://youtu.be/-rZWOW8UfIk?si=ilnmaO4l3HqP87RL"},
-        {"name": "Venpani Malare - Episode 2", "image": "venpani2.jpg", "link": "https://youtu.be/CExeXTpKAe8?si=03E7xLIkBufeswfx"},
-        {"name": "Venpani Malare - Episode 3", "image": "venpani3.jpg", "link": "https://youtu.be/UAaRp1lLx64?si=ptNRRngV7KfafG7G"},
-        {"name": "Venpani Malare - Episode 4", "image": "venpani4.jpg", "link": "https://youtu.be/u2UAJkNf1Ao?si=Al3V0qvtyocYogEn"},
-        {"name": "Venpani Malare - Episode 5", "image": "venpani5.jpg", "link": "https://youtu.be/TmORlTyNN-E?si=GPhwlBYFyKHfy4w"}
+        {"name": "Venpani Malare - Episode 1", "image": "venpani.jpg", "link": "https://youtu.be/-rZWOW8UfIk?si=ilnmaO4l3HqP87RL"},
+        {"name": "Venpani Malare - Episode 2", "image": "venpani.jpg", "link": "https://youtu.be/CExeXTpKAe8?si=03E7xLIkBufeswfx"},
+        {"name": "Venpani Malare - Episode 3", "image": "venpani.jpg", "link": "https://youtu.be/UAaRp1lLx64?si=ptNRRngV7KfafG7G"},
+        {"name": "Venpani Malare - Episode 4", "image": "venpani.jpg", "link": "https://youtu.be/u2UAJkNf1Ao?si=Al3V0qvtyocYogEn"},
+        {"name": "Venpani Malare - Episode 5", "image": "venpani.jpg", "link": "https://youtu.be/TmORlTyNN-E?si=GPhwlBYFyKHfy4w"}
     ],
     "Album Song": [
         {"name": "Aval Peyar Dhatchaeni", "image": "dhatchaeni.jpg", "link": "https://youtu.be/zsN6838vfo4?si=fASfFevrAijeqZov"},
