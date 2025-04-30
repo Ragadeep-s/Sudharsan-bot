@@ -41,3 +41,5 @@ INSTAGRAM_LINK = "https://www.instagram.com/sudharsan_sedouramane_official?igsh=
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_path = "images/director_main.jpg"
     if os.path.exists(image_path):
+       with open(image_path, 'rb') as img:
+           await update.message.reply_photo(photo=img, caption="🎬 Director Sudharsan Sedhuramne\nCrafting stories beyond boundaries.")
