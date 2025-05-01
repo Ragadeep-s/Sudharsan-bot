@@ -110,3 +110,19 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
     app.run_polling()
+
+
+ABOUT_DIRECTOR_HTML = '''
+<b>About the Director</b>
+
+<img src="images/director_main.jpg"/>
+
+<b>🎬 Name:</b> <i>Sudharsan</i>
+<b>🏆 Passion:</b> <i>Independent Short Film Maker</i>
+<b>✨ Vision:</b> <i>Inspire through storytelling & meaningful visuals</i>
+
+<b>Follow us on:</b>
+🔗 <a href="https://www.instagram.com/">Instagram</a> |
+🔗 <a href="https://www.youtube.com/">YouTube</a> |
+🔗 <a href="https://t.me/">Telegram</a>
+'''
