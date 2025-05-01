@@ -1,4 +1,4 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, BotCommandrdMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 import os, logging
 
@@ -36,8 +36,8 @@ ABOUT_DIRECTOR_TEXT = (
     "A passionate \U0001F4DD storyteller, writer, and creative soul who believes in the power of \U0001F499 *words and emotions*.")
 ABOUT_DIRECTOR_TEXT += (
     "\n\n\U0001F3A5 From journalism to \U0001F3AC filmmaking, I'm a *National Award winner* chasing meaningful content that resonates."
-    "\n\n\U0001F339 *Avalo Athirai* is not just a project — it's a piece of my heart."
-    "\n\nWhen I’m not writing, I enjoy deep conversations, clever humor, and the subtle beauty in everyday life."
+    "\n\n\U0001F339 *Avalo Athirai* is not just a project â€” it's a piece of my heart."
+    "\n\nWhen Iâ€™m not writing, I enjoy deep conversations, clever humor, and the subtle beauty in everyday life."
     "\n\n\U0001F4F1 *Explore, connect, and join me on this creative journey.*"
 )
 
@@ -105,6 +105,15 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         buttons.append([InlineKeyboardButton("\U0001F464 About Director", callback_data="about_director")])
         await query.edit_message_text("\U0001F4FA *Welcome! View my projects below:*", parse_mode="Markdown", reply_markup=InlineKeyboardMarkup(buttons))
 
+
+async def set_bot_commands(app):
+    # Set default commands shown in the Telegram menu
+    await app.bot.set_my_commands([
+        BotCommand("start", "Start the bot"),
+        BotCommand("about", "About the Director"),
+        BotCommand("projects", "View Projects"),
+    ])
+
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
@@ -117,12 +126,12 @@ ABOUT_DIRECTOR_HTML = '''
 
 <img src="images/director_main.jpg"/>
 
-<b>🎬 Name:</b> <i>Sudharsan</i>
-<b>🏆 Passion:</b> <i>Independent Short Film Maker</i>
-<b>✨ Vision:</b> <i>Inspire through storytelling & meaningful visuals</i>
+<b>ðŸŽ¬ Name:</b> <i>Sudharsan</i>
+<b>ðŸ† Passion:</b> <i>Independent Short Film Maker</i>
+<b>âœ¨ Vision:</b> <i>Inspire through storytelling & meaningful visuals</i>
 
 <b>Follow us on:</b>
-🔗 <a href="https://www.instagram.com/">Instagram</a> |
-🔗 <a href="https://www.youtube.com/">YouTube</a> |
-🔗 <a href="https://t.me/">Telegram</a>
+ðŸ”— <a href="https://www.instagram.com/">Instagram</a> |
+ðŸ”— <a href="https://www.youtube.com/">YouTube</a> |
+ðŸ”— <a href="https://t.me/">Telegram</a>
 '''
