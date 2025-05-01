@@ -32,8 +32,15 @@ PROJECTS = {
     ]
 }
 
-ABOUT_DIRECTOR_TEXT = """🎥 **Sudharsan Sedhuramne** is an independent filmmaker whose work merges striking visuals and heartfelt storytelling. From **award-winning short films** and **captivating web series** to bold **pilot films** and immersive **album songs**, his creations redefine independent cinema. Every project reflects his innovative vision, crafting experiences that linger long after the screen fades.
-"""
+ABOUT_DIRECTOR_TEXT = (
+    "Hi, I’m *Sudharsan Sedouramane* — a passionate storyteller, writer, and creative soul who believes in the power of words and emotions.\n\n"
+    "Whether it’s through songs, scripts, or heartfelt narratives, I love connecting with people by turning real moments into compelling stories.\n\n"
+    "I’m also a proud *National Award winner*, a recognition that fuels my commitment to creating work that’s both authentic and impactful.\n\n"
+    "From journalism to independent music and filmmaking, I’m constantly chasing meaningful content that resonates.\n\n"
+    "My latest venture, *Avalo Athirai*, is not just a creative project — it’s a piece of my heart, crafted with honesty and love.\n\n"
+    "When I’m not writing, I enjoy deep conversations, clever humor, and exploring the subtle beauty in everyday life.\n\n"
+    "This bot is a glimpse into my world — feel free to explore, connect, and join me on this creative journey."
+)
 
 WHATSAPP_LINK = "https://wa.me/917092197506"
 INSTAGRAM_LINK = "https://www.instagram.com/sudharsan_sedouramane_official?igsh=azdtdXd0MGZrcjk1"
@@ -42,38 +49,37 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_path = "images/director_main.jpg"
     if os.path.exists(image_path):
         with open(image_path, 'rb') as img:
-            await update.message.reply_photo(photo=img, caption="🎬 Director Sudharsan Sedhuramne\nCrafting stories beyond boundaries.")
+            await update.message.reply_photo(photo=img, caption="\ud83c\udfac *Director Sudharsan Sedhuramne*\nCrafting stories beyond boundaries.", parse_mode="Markdown")
 
     buttons = [[InlineKeyboardButton(name, callback_data=name)] for name in PROJECTS.keys()]
     buttons.append([InlineKeyboardButton("About Director", callback_data="about_director")])
-    await update.message.reply_text("Welcome, view my projects from below options:", reply_markup=InlineKeyboardMarkup(buttons))
+    await update.message.reply_text("\u2728 *Welcome! View my projects from the options below:*", parse_mode="Markdown", reply_markup=InlineKeyboardMarkup(buttons))
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
 
     if query.data in PROJECTS:
-        buttons = [[InlineKeyboardButton(p["name"], callback_data=f"project_{query.data}_{i}")]
-                   for i, p in enumerate(PROJECTS[query.data])]
-        buttons.append([InlineKeyboardButton("Back", callback_data="main_menu")])
-        await query.edit_message_text(f"Select a project from {query.data}:", reply_markup=InlineKeyboardMarkup(buttons))
+        buttons = [[InlineKeyboardButton(p["name"], callback_data=f"project_{query.data}_{i}")] for i, p in enumerate(PROJECTS[query.data])]
+        buttons.append([InlineKeyboardButton("\ud83d\udd19 Back", callback_data="main_menu")])
+        await query.edit_message_text(f"\ud83c\udfac *{query.data}* — Select a project:", parse_mode="Markdown", reply_markup=InlineKeyboardMarkup(buttons))
 
     elif query.data.startswith("project_"):
         _, category, index = query.data.split("_", 2)
         project = PROJECTS[category][int(index)]
         image_path = f"images/{project.get('image', '')}"
-        caption = project["name"]
+        caption = f"\ud83c\udfa5 *{project['name']}*\n\ud83d\udd17 Click below to watch"
 
         if os.path.exists(image_path):
             with open(image_path, 'rb') as img:
-                await query.message.reply_photo(photo=img, caption=caption, reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("Open Video", url=project["link"])],
-                    [InlineKeyboardButton("Back", callback_data=category)]
+                await query.message.reply_photo(photo=img, caption=caption, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("\ud83d\udd17 Open Video", url=project["link"])],
+                    [InlineKeyboardButton("\u2b05\ufe0f Back to Category", callback_data=category)]
                 ]))
         else:
-            await query.message.reply_text(f"{caption}", reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Open Video", url=project["link"])],
-                [InlineKeyboardButton("Back", callback_data=category)]
+            await query.message.reply_text(caption, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("\ud83d\udd17 Open Video", url=project["link"])],
+                [InlineKeyboardButton("\u2b05\ufe0f Back to Category", callback_data=category)]
             ]))
 
     elif query.data == "about_director":
@@ -82,23 +88,22 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             with open(about_image_path, 'rb') as img:
                 await query.message.reply_photo(photo=img)
 
-        await query.message.reply_text(ABOUT_DIRECTOR_TEXT, parse_mode="Markdown",
-                                       reply_markup=InlineKeyboardMarkup([
-                                           [InlineKeyboardButton("Contact Director", callback_data="contact_director")],
-                                           [InlineKeyboardButton("Back", callback_data="main_menu")]
-                                       ]))
+        await query.message.reply_text(ABOUT_DIRECTOR_TEXT, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("\ud83d\udcde Contact Director", callback_data="contact_director")],
+            [InlineKeyboardButton("\ud83d\udd19 Back", callback_data="main_menu")]
+        ]))
 
     elif query.data == "contact_director":
-        await query.message.reply_text("Contact Sudharsan through:", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("WhatsApp", url=WHATSAPP_LINK)],
-            [InlineKeyboardButton("Instagram", url=INSTAGRAM_LINK)],
-            [InlineKeyboardButton("Back", callback_data="about_director")]
+        await query.message.reply_text("\ud83d\udc64 Connect with Sudharsan:", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("\ud83d\udcde WhatsApp", url=WHATSAPP_LINK)],
+            [InlineKeyboardButton("\ud83d\udcf8 Instagram", url=INSTAGRAM_LINK)],
+            [InlineKeyboardButton("\u2b05\ufe0f Back", callback_data="about_director")]
         ]))
 
     elif query.data == "main_menu":
         buttons = [[InlineKeyboardButton(name, callback_data=name)] for name in PROJECTS.keys()]
         buttons.append([InlineKeyboardButton("About Director", callback_data="about_director")])
-        await query.edit_message_text("Welcome, view my projects from below options:", reply_markup=InlineKeyboardMarkup(buttons))
+        await query.edit_message_text("\u2728 *Welcome! View my projects from the options below:*", parse_mode="Markdown", reply_markup=InlineKeyboardMarkup(buttons))
 
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
